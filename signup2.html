@@ -1,0 +1,63 @@
+// signup code in case I need it
+
+
+document.querySelector("form").addEventListener("submit",signup)
+var userDetails=JSON.parse(localStorage.getItem("userDatas"))||[]
+function signup(event) {
+    event.preventDefault()
+    var userName = document.querySelector("#name").value;
+    var userContact = document.querySelector("#contact").value;
+    var userEmail = document.querySelector("#mail").value;
+    var userPass = document.querySelector("#pass").value;
+    const userData = {
+        username:userName,
+        usercontact:userContact,
+        usermail:userEmail,
+        userpass:userPass
+    }
+    userDetails.push(userData);
+    localStorage.setItem("userDatas",JSON.stringify(userDetails))
+    if(userName.length>4) {
+        alert("signup success")
+        window.location.href='login.html'
+    }
+}
+
+
+// login
+
+var registeredUser = JSON.parse(localStorage.getItem("userDatas"))||[];
+document.querySelector("form").addEventListener('submit',login);
+function login(event) {
+    event.preventDefault();
+    var email = document.querySelector("#mail").value;
+    var password = document.querySelector("#pass").value;
+    var flag = false;
+    for(var i=0; i<registeredUser.length; i++) {
+        if(registeredUser[i].usermail==email && registeredUser[i].userpass==password) {
+            flag = true;
+        }
+    }
+    if(flag==true) {
+        window.location.href="index.html";
+    }
+    else{
+        alert("wrong credentials");
+    }
+}
+
+
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
